@@ -1,0 +1,25 @@
+{# =================================================================
+   EPISODIC MEMORY TEMPLATE - Past Session Summaries
+   Contains summaries of previous coaching sessions.
+   ================================================================= #}
+
+{% if past_sessions %}
+# POPRZEDNIE SESJE
+
+{% for session in past_sessions %}
+## Sesja {{ loop.index }} ({{ session.date | default('nieznana data') }})
+{% if session.topic %}
+Temat: {{ session.topic }}
+{% endif %}
+{% if session.insights %}
+Wglądy: {{ session.insights | join(', ') }}
+{% endif %}
+{% if session.action_steps %}
+Ustalone kroki: {{ session.action_steps | join(', ') }}
+{% endif %}
+{% if session.summary %}
+Podsumowanie: {{ session.summary }}
+{% endif %}
+
+{% endfor %}
+{% endif %}

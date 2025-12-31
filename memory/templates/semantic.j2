@@ -1,0 +1,40 @@
+{# =================================================================
+   SEMANTIC MEMORY TEMPLATE - Long-term Knowledge
+   Contains accumulated knowledge about the user across sessions.
+   ================================================================= #}
+
+{% if user_profile %}
+# PROFIL UŻYTKOWNIKA (Pamięć długoterminowa)
+
+{% if user_profile.name %}
+Imię: {{ user_profile.name }}
+{% endif %}
+
+{% if user_profile.values %}
+## WARTOŚCI
+{% for value in user_profile.values %}
+- {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if user_profile.goals %}
+## CELE DŁUGOTERMINOWE
+{% for goal in user_profile.goals %}
+- {{ goal }}
+{% endfor %}
+{% endif %}
+
+{% if user_profile.strengths %}
+## MOCNE STRONY (odkryte w rozmowach)
+{% for strength in user_profile.strengths %}
+- {{ strength }}
+{% endfor %}
+{% endif %}
+
+{% if user_profile.challenges %}
+## WYZWANIA (powracające tematy)
+{% for challenge in user_profile.challenges %}
+- {{ challenge }}
+{% endfor %}
+{% endif %}
+{% endif %}

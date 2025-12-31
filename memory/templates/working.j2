@@ -1,0 +1,60 @@
+{# =================================================================
+   WORKING MEMORY TEMPLATE - Current Session Context
+   Contains only user-provided facts (LC-007: No Hallucination)
+   ================================================================= #}
+
+# AKTUALNY KONTEKST SESJI
+
+## UŻYTKOWNIK
+{% if user_name %}
+Imię: {{ user_name }}
+{% else %}
+Imię: NIEZNANE - musisz zapytać!
+{% endif %}
+
+{% if main_goal %}
+Cel rozmowy: {{ main_goal }}
+{% else %}
+Cel: NIEZNANY - zapytaj, z czym przychodzi!
+{% endif %}
+
+## STATUS SESJI
+- Faza: {{ current_phase | default('INTRODUCTION') }}
+- Numer tury: {{ turn_count | default(0) }}
+- Coach przedstawiony: {{ 'TAK' if coach_introduced else 'NIE' }}
+- Kontekst zebrany: {{ 'TAK' if context_gathered else 'NIE' }}
+- Język rozmowy: {{ detected_language | default('pl') }}
+
+{% if key_facts %}
+## FAKTY PODANE PRZEZ UŻYTKOWNIKA (LC-007)
+Możesz nawiązywać TYLKO do tych faktów:
+{% for fact in key_facts %}
+- {{ fact }}
+{% endfor %}
+{% endif %}
+
+{% if topics %}
+## WĄTKI ROZMOWY (LC-008)
+{% for topic in topics %}
+- {{ topic }}
+{% endfor %}
+{% endif %}
+
+{% if detected_emotions %}
+## WYKRYTE EMOCJE (LC-011)
+{{ detected_emotions | join(', ') }}
+{% endif %}
+
+{% if key_insights %}
+## WGLĄDY UŻYTKOWNIKA (LC-009)
+{% for insight in key_insights %}
+- {{ insight }}
+{% endfor %}
+{% endif %}
+
+{% if action_steps %}
+## USTALONE KROKI DZIAŁANIA (LC-010)
+{% for step in action_steps %}
+- {{ step }}
+{% endfor %}
+{% endif %}
